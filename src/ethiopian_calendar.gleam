@@ -4,6 +4,10 @@ pub type EthiopianDate {
   EthiopianDate(year: Int, month: Int, day: Int)
 }
 
+const days_in_year = 365
+
+const days_in_month = 30
+
 pub fn new_date(year: Int, month: Int, day: Int) -> EthiopianDate {
   EthiopianDate(year:, month:, day:)
 }
@@ -44,6 +48,24 @@ pub fn month_length(year: Int, month: Int) -> Int {
     }
     _ -> 30
   }
+}
+
+pub fn to_day_number(date: EthiopianDate) -> Int {
+  case date {
+    EthiopianDate(year, month, day) -> {
+      year * 365 + { month - 1 } * 30 + day
+    }
+  }
+}
+
+pub fn from_day_number(days: Int) -> EthiopianDate {
+  let year = days / 365
+  let remaining = days % 365
+
+  let month = { remaining / 30 } + 1
+  let day = { remaining % 30 } + 1
+
+  EthiopianDate(year, month, day)
 }
 
 pub fn hello() -> String {
